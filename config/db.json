@@ -1,0 +1,4 @@
+{
+	"local":"mongodb://localhost:27017/cfkpizza",
+	"remote":"mongodb://ferid:toto2018@ds235732.mlab.com:35732/disdonc_db"
+}
