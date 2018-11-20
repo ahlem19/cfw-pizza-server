@@ -5,6 +5,7 @@ var path = require('path');
 var mongoose = require('mongoose');
 var logger = require('morgan');
 var config = require('./config/db.json');
+var cors= require('cors');
 mongoose.connect(config.remote);
 
 var indexRouter = require('./routes/index');
@@ -13,6 +14,7 @@ var pizzaRouter = require ('./routes/pizza');
 
 
 var app = express();
+app.use(cors());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:true}));
 
