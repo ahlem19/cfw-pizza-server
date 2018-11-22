@@ -1,8 +1,8 @@
-var express =require('express');
-var multer=require('multer');
-var Q =require('q');
-var router=express.Router();
-var Pizza=require('../schemas/pizza-schemas');
+var express = require('express');
+var multer = require('multer');
+var Q = require('q');
+var router = express.Router();
+var Pizza = require('../schemas/pizza-schemas');
 
 var storage = multer.diskStorage({ //multers disk storage settings
     destination: function(req, file, cb) {
@@ -43,7 +43,7 @@ router.post('/picture', upload, function(req, res, next) {
             res.json({ error_code: 1, err_desc: err });
             return;
         }
-        res.json({ error_code: 0, err_desc: 'Avatar successfully uploded' });
+        res.json({ error_code: 0, err_desc: 'Picture successfully uploaded' });
     });
 });
 

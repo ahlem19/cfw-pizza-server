@@ -5,19 +5,19 @@ var path = require('path');
 var mongoose = require('mongoose');
 var logger = require('morgan');
 var config = require('./config/db.json');
-var cors= require('cors');
+var cors = require('cors');
 mongoose.connect(config.remote);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var pizzaRouter = require ('./routes/pizza');
+var pizzaRouter = require('./routes/pizza');
 var pictureRouter = require('./routes/picture');
 
 
 var app = express();
 app.use(cors());
 app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended:true}));
+app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use(logger('dev'));
 
@@ -27,22 +27,22 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/pizza',pizzaRouter);
-app.use('/uploads',pictureRouter);
+app.use('/pizza', pizzaRouter);
+app.use('/uploads', pictureRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+app.use(function(req, res, next) {
+    next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
+    // render the error page
+    res.status(err.status || 500);
 });
 
 module.exports = app;
