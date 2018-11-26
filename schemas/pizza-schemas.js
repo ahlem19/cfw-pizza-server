@@ -6,10 +6,10 @@ const pizzaSchema = new schema({
         type: String,
         required: true
     },
-    ingredients: [{
+    ingredients: {
         type: String,
         required: true
-    }],
+    },
     price: {
         type: Number
     },
