@@ -15,20 +15,25 @@ var pictureRouter = require('./routes/picture');
 
 
 var app = express();
-app.use(cors());
+
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use(logger('dev'));
 
-
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/pizza', pizzaRouter);
 app.use('/uploads', pictureRouter);
+
+app.use('/ressources/pizza-pictures',express.static(path.join(__dirname, 'ressources/pizza-pictures')));
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
