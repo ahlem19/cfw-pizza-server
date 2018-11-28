@@ -16,7 +16,7 @@ const pizzaSchema = new schema({
     picture: {
         type: String,
         required: false,
-        default: 'http://la-cucina.fr/wp-content/uploads/2014/07/gal1.jpg'
+        default: 'http://localhost:3000/ressources/pizza-pictures/file-5bfd307bfa969c5bf59ec9d9.jpg'
     },
 
 }, { timestamps: { createdAt: 'created_at' } });

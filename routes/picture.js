@@ -25,7 +25,7 @@ var storage = multer.diskStorage({ //multers disk storage settings
 
 var upload = multer({ //multer settings
     storage: storage
-}).single('picture');
+}).any('picture');
 
 function updatePicture(id, path) {
     var deferred = Q.defer();
