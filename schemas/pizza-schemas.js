@@ -15,8 +15,7 @@ const pizzaSchema = new schema({
     },
     picture: {
         type: String,
-        required: false,
-        default: 'http://localhost:3000/ressources/pizza-pictures/file-5bfd307bfa969c5bf59ec9d9.jpg'
+        required: false
     },
 
 }, { timestamps: { createdAt: 'created_at' } });
