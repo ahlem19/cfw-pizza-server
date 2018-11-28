@@ -10,7 +10,7 @@ var storage = multer.diskStorage({ //multers disk storage settings
     },
     filename: function(req, file, cb) {
         var pizzaId = req.body.pizzaId;
-        var path = file.fieldname + '-' + pizzaId + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1];
+        var path = file.fieldname + '-' + Date.now() + '-' + pizzaId + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1];
         cb(null, path);
 
         updatePicture(pizzaId, path)
