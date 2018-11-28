@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var logger = require('morgan');
 var config = require('./config/db.json');
 var cors = require('cors');
-mongoose.connect(config.remote);
+mongoose.connect(config.local);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
