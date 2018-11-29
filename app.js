@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var logger = require('morgan');
 var config = require('./config/db.json');
 var cors = require('cors');
-mongoose.connect(config.local);
+mongoose.connect(config.remote, { useNewUrlParser: true });
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -28,7 +28,7 @@ app.use('/users', usersRouter);
 app.use('/pizza', pizzaRouter);
 app.use('/uploads', pictureRouter);
 
-app.use('/ressources/pizza-pictures',express.static(path.join(__dirname, 'ressources/pizza-pictures')));
+app.use('/ressources/pizza-pictures', express.static(path.join(__dirname, 'ressources/pizza-pictures')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 

@@ -6,11 +6,11 @@ var Pizza = require('../schemas/pizza-schemas');
 
 var storage = multer.diskStorage({ //multers disk storage settings
     destination: function(req, file, cb) {
-        cb(null, './uploads/pizza-pictures');
+        cb(null, './ressources/pizza-pictures');
     },
     filename: function(req, file, cb) {
         var pizzaId = req.body.pizzaId;
-        var path = file.fieldname + '-' + pizzaId + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1];
+        var path = file.fieldname + '-' + Date.now() + '-' + pizzaId + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1];
         cb(null, path);
 
         updatePicture(pizzaId, path)
