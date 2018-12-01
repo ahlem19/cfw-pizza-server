@@ -1,27 +1,25 @@
 var express = require('express');
 var router = express.Router();
-
-// var ws = null;
 var allActive = require('../websocket');
 var Pizza = require('../schemas/pizza-schemas');
 function update() {
-    // console.log(allActive);
-    // console.log("colled",ws);
-    for(user in allActive)
+    for (user in allActive)
         allActive[user].send("new update");
-    // if (ws === null) {
-    //     result.then(res => {
-    //         ws = res;
-    //         ws.send("new update");
-    //     })
-    // }
-    // if (ws)
-    //     ws.send("new update");
 }
 /* GET pizza listing. */
 router.get('/', function (req, res, next) {
-    Pizza.find({}, function (err, pizza) {
-        if (err) throw Error;
+
+    if (req.query.next)
+        var next = Number(req.query.next);
+    else
+        var next = 0;
+    var query = [
+        { $sort: { _id: 1 } },
+        { $skip: next},
+        { $limit: 5 }
+    ];
+    Pizza.aggregate(query, function (err, pizza) {
+        if (err) throw err;
         res.json(pizza);
     });
 });
