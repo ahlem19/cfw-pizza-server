@@ -6,13 +6,12 @@ var mongoose = require('mongoose');
 var logger = require('morgan');
 var config = require('./config/db.json');
 var cors = require('cors');
-mongoose.connect(config.remote, { useNewUrlParser: true });
+mongoose.connect(config.remote,   {useCreateIndex: true,useNewUrlParser: true});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var pizzaRouter = require('./routes/pizza');
 var pictureRouter = require('./routes/picture');
-var authRouter = require('./routes/auth');
 
 
 var app = express();
@@ -26,7 +25,6 @@ app.use(logger('dev'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/auth', authRouter);
 app.use('/pizza', pizzaRouter);
 app.use('/uploads', pictureRouter);
 
