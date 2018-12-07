@@ -2,13 +2,14 @@ var express = require('express');
 var router = express.Router();
 var allActive = require('../websocket');
 var Pizza = require('../schemas/pizza-schemas');
+var tokenMiddleWare = require('../middleware/token');
 
 function update() {
     for (var user in allActive)
         allActive[user].send("new update");
 }
 /* GET pizza listing. */
-router.get('/', function(req, res) {
+router.get('/', tokenMiddleWare.verifyToken, function(req, res) {
     var nextPage = req.query.nextPage;
     if (nextPage) nextPage = Number(req.query.nextPage);
     else nextPage = 0;
@@ -24,7 +25,7 @@ router.get('/', function(req, res) {
 });
 
 /* POST Pizza. */
-router.post('/', function(req, res, next) {
+router.post('/', tokenMiddleWare.verifyToken, function(req, res, next) {
     var pizza = req.body.pizza;
     Pizza.create(pizza, function(err, doc) {
         if (err) throw err;
@@ -34,7 +35,7 @@ router.post('/', function(req, res, next) {
 
 });
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', tokenMiddleWare.verifyToken, function(req, res, next) {
     var pizzaId = req.params.id;
     var pizza = req.body.pizza;
     Pizza.findByIdAndUpdate(pizzaId, {
@@ -53,7 +54,7 @@ router.put('/:id', function(req, res, next) {
     });
 });
 
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', tokenMiddleWare.verifyToken, function(req, res, next) {
     var pizzaId = req.params.id;
     Pizza.remove({ _id: pizzaId }, function(err, doc) {
         if (err) throw err;

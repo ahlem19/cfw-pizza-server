@@ -1,0 +1,6 @@
+{
+    "token": {
+        "secret": "CFK Workshop  Pizza WebApp",
+        "expiresInSeconds": "3600*3600*24*30"
+    }
+}
