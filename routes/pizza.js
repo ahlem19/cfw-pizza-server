@@ -10,16 +10,10 @@ function update() {
 }
 /* GET pizza listing. */
 router.get('/', tokenMiddleWare.verifyToken, function(req, res) {
-    var nextPage = req.query.nextPage;
-    if (nextPage) nextPage = Number(req.query.nextPage);
-    else nextPage = 0;
-    var query = [
-        { $sort: { _id: 1 } },
-        { $skip: nextPage },
-        { $limit: 5 }
-    ];
-    Pizza.aggregate(query, function(err, pizza) {
-        if (err) throw err;
+    Pizza.find({}, function(err, pizza) {
+        if (err) {
+            res.status(501).json({ error: err, mesage: "Server Error" })
+        }
         res.json(pizza);
     });
 });
@@ -41,7 +35,7 @@ router.put('/:id', tokenMiddleWare.verifyToken, function(req, res, next) {
     Pizza.findByIdAndUpdate(pizzaId, {
         $set: {
             label: pizza.label,
-            ingredient: pizza.ingredient,
+            ingredients: pizza.ingredients,
             price: pizza.price,
             picture: pizza.picture
 
